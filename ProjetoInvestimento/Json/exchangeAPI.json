@@ -1,0 +1,169 @@
+{
+    "by": "default",
+    "valid_key": true,
+    "results": {
+        "currencies": {
+            "source": "BRL",
+            "USD": {
+                "name": "Dollar",
+                "buy": 5.1948,
+                "sell": 5.1958,
+                "variation": -0.001
+            },
+            "EUR": {
+                "name": "Euro",
+                "buy": 5.1332,
+                "sell": 5.1332,
+                "variation": 0
+            },
+            "GBP": {
+                "name": "Pound Sterling",
+                "buy": 5.8844,
+                "sell": null,
+                "variation": 0
+            },
+            "ARS": {
+                "name": "Argentine Peso",
+                "buy": 0.0349,
+                "sell": null,
+                "variation": -0.004
+            },
+            "CAD": {
+                "name": "Canadian Dollar",
+                "buy": 3.8142,
+                "sell": null,
+                "variation": 0.001
+            },
+            "AUD": {
+                "name": "Australian Dollar",
+                "buy": 3.3718,
+                "sell": null,
+                "variation": -0.001
+            },
+            "JPY": {
+                "name": "Japanese Yen",
+                "buy": 0.0359,
+                "sell": null,
+                "variation": -0.017
+            },
+            "CNY": {
+                "name": "Renminbi",
+                "buy": 0.7307,
+                "sell": null,
+                "variation": -0.006
+            },
+            "BTC": {
+                "name": "Bitcoin",
+                "buy": 111975.149,
+                "sell": 111975.149,
+                "variation": 1.506
+            }
+        },
+        "stocks": {
+            "IBOVESPA": {
+                "name": "BM&F BOVESPA",
+                "location": "Sao Paulo, Brazil",
+                "points": 117197.82,
+                "variation": 0.83
+            },
+            "IFIX": {
+                "name": "Índice de Fundos de Investimentos Imobiliários B3",
+                "location": "Sao Paulo, Brazil",
+                "points": 2986.5,
+                "variation": 0.05
+            },
+            "NASDAQ": {
+                "name": "NASDAQ Stock Market",
+                "location": "New York City, United States",
+                "points": 11148.64,
+                "variation": -0.25
+            },
+            "DOWJONES": {
+                "name": "Dow Jones Industrial Average",
+                "location": "New York City, United States",
+                "points": 30273.87,
+                "variation": -0.14
+            },
+            "CAC": {
+                "name": "CAC 40",
+                "location": "Paris, French",
+                "points": 5985.46,
+                "variation": -0.9
+            },
+            "NIKKEI": {
+                "name": "Nikkei 225",
+                "location": "Tokyo, Japan",
+                "points": 27120.53,
+                "variation": 0.48
+            }
+        },
+        "available_sources": [
+            "BRL"
+        ],
+        "bitcoin": {
+            "blockchain_info": {
+                "name": "Blockchain.info",
+                "format": [
+                    "USD",
+                    "en_US"
+                ],
+                "last": 20335.13,
+                "buy": 20335.13,
+                "sell": 20335.13,
+                "variation": 1.506
+            },
+            "coinbase": {
+                "name": "Coinbase",
+                "format": [
+                    "USD",
+                    "en_US"
+                ],
+                "last": 20344.56,
+                "variation": 1.553
+            },
+            "bitstamp": {
+                "name": "BitStamp",
+                "format": [
+                    "USD",
+                    "en_US"
+                ],
+                "last": 20325,
+                "buy": 20325,
+                "sell": 20322,
+                "variation": 1.483
+            },
+            "foxbit": {
+                "name": "FoxBit",
+                "format": [
+                    "BRL",
+                    "pt_BR"
+                ],
+                "last": 351098.91,
+                "variation": -1.885
+            },
+            "mercadobitcoin": {
+                "name": "Mercado Bitcoin",
+                "format": [
+                    "BRL",
+                    "pt_BR"
+                ],
+                "last": 106005.7559408,
+                "buy": 106008.89800463,
+                "sell": 106195.13252279,
+                "variation": 1.3
+            }
+        },
+        "taxes": [
+            {
+                "date": "2022-10-04",
+                "cdi": 13.75,
+                "selic": 13.75,
+                "daily_factor": 1.00050788,
+                "selic_daily": 13.65,
+                "cdi_daily": 13.65
+            }
+        ]
+    },
+    "execution_time": 0,
+    "from_cache": true
+}
