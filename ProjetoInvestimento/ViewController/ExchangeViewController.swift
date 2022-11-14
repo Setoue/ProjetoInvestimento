@@ -85,14 +85,14 @@ class ExchangeViewController: UIViewController {
         
         let buyAndSell: BuyAndSellViewController = BuyAndSellViewController()
         buyAndSell.labelText = self.toSellExchange()
-        buyAndSell._title = "Vender"
+        buyAndSell.titleScreen = "Vender"
         self.navigationController?.pushViewController(buyAndSell, animated: true)
     }
     @objc func pressButtonBuy(){
         
         let buyAndSell: BuyAndSellViewController = BuyAndSellViewController()
         buyAndSell.labelText = self.toBuyExchange()
-        buyAndSell._title = "Comprar"
+        buyAndSell.titleScreen = "Comprar"
         self.navigationController?.pushViewController(buyAndSell, animated: true)
     }
     

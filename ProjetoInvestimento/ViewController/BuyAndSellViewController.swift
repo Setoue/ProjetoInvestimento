@@ -13,7 +13,7 @@ class BuyAndSellViewController: UIViewController {
     //MARK: - Attributes
     
     var screenBuyAndSell: BuyAndSellScreen?
-    var _title: String?
+    var titleScreen: String?
     var labelText: String?
     
     //MARK: - Life Cycle
@@ -21,7 +21,7 @@ class BuyAndSellViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        title = self._title
+        title = self.titleScreen
         self.screenBuyAndSell?.changeData(label: self.labelText ?? "")
         self.screenBuyAndSell?.buttonHome.addTarget(self, action: #selector(tappedBackHome), for: .touchUpInside)
         
