@@ -23,18 +23,13 @@ class HomeViewController: UIViewController {
         self.viewModel.delegate(delegate: self) //primeiro executa o delegate
         self.viewModel.seek() //dps executa a requisicao
         title = "Moedas"
-        
         navigationController?.navigationItem.titleView?.tintColor = .white
-        
     }
     
     override func loadView() {
         self.screenHome = HomeScreen()
         self.view = screenHome
     }
-    
-    //MARK: - Methods
-    
 }
 
 //MARK: - TableView
@@ -65,7 +60,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         tableView.reloadData()
         navigationController?.pushViewController(rootExchange, animated: true)
         navigationController?.navigationBar.tintColor = UIColor.white
-
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -75,7 +69,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 20
     }
-    
 }
 
 //MARK: - Delegate: ExchangeViewModelDelegate
@@ -88,8 +81,6 @@ extension HomeViewController: ExchangeViewModelDelegate{
     func error(mensage: String) {
         print("Deu ruim")
     }
-    
-    
 }
 
 
