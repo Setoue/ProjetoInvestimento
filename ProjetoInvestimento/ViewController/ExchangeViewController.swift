@@ -42,7 +42,7 @@ class ExchangeViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-        self.buttoBuyChecked()
+        self.buttonBuyChecked()
         self.buttonSellChecked()
     }
     
@@ -53,7 +53,7 @@ class ExchangeViewController: UIViewController {
     
     //MARK: - Methods
     
-    func buttoBuyChecked(){
+    func buttonBuyChecked(){
         
         if self.wallet?.saldo ?? 0 > 0 && self.screenExchange?.textField.text ?? "" != ""{
             self.screenExchange?.buttonComprar.addTarget(self, action: #selector(self.pressButtonBuy) , for: .touchUpInside)
