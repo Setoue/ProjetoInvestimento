@@ -25,27 +25,11 @@ struct Results: Codable {
         case currencies
         case availableSources = "available_sources"
     }
-    
 }
 
 struct Currencies: Codable {
     var source: String
     var USD, EUR, GBP, ARS, CAD, AUD, JPY, CNY, BTC: Coins
-    
-//    enum CodingKeys: String, CodingKey {
-//        
-//        case source
-//        case USD = "USD"
-//        case EUR = "EUR"
-//        case GBP = "GBP"
-//        case ARS = "ARS"
-//        case CAD = "CAD"
-//        case AUD = "AUD"
-//        case JPY = "JPY"
-//        case CNY = "CNY"
-//        case BTC = "BTC"
-//        
-//    }
 }
 
 struct Coins: Codable{
