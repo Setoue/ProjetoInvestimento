@@ -24,7 +24,6 @@ class BuyAndSellViewController: UIViewController {
         title = self.titleScreen
         self.screenBuyAndSell?.changeData(label: self.labelText ?? "")
         self.screenBuyAndSell?.buttonHome.addTarget(self, action: #selector(tappedBackHome), for: .touchUpInside)
-        
     }
 
     override func loadView() {
@@ -36,9 +35,7 @@ class BuyAndSellViewController: UIViewController {
     //MARK: - Methods
    
     @objc func tappedBackHome(){
-        
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
 }
 
