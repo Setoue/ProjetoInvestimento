@@ -13,19 +13,18 @@ class Wallet {
     
     var saldo: Double
     var caixaWallet: [String: Int]
-    
     var listSiglas = ["ARS","USD","EUR","AUD","GBP","CAD","JPY","BTC","CNY"]
     
     //MARK: - Constructor
     
     init() {
         self.saldo = 700
-        var _caixaWallet = [String: Int]()
-        
+        var caixaWallet = [String: Int]()
+    
         for coins in listSiglas{
-            _caixaWallet[coins] = 0
+            caixaWallet[coins] = 0
         }
-        self.caixaWallet = _caixaWallet
+        self.caixaWallet = caixaWallet
     }
     
     //MARK: - Methods
@@ -34,7 +33,6 @@ class Wallet {
         let format = NumberFormatter()
         format.numberStyle = .currency
         format.currencyCode = "BRL"
-        
         guard let numberFormat = format.string(from: NSNumber(value: value)) else { return "R$0,00"}
         return numberFormat
     }
