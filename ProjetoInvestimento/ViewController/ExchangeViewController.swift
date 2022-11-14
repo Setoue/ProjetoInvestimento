@@ -21,16 +21,14 @@ class ExchangeViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .black
         title = "Câmbio"
-        
+//        guard let wallet = self.wallet else { return }
         let compra = self.exchange.compra ?? 0
         let venda = self.exchange.venda ?? 0
-        let _sigla = self.exchange.sigla ?? ""
-        let caixa = self.wallet?.caixaWallet[_sigla]
-        let _saldo = self.wallet?.saldo
-        let saldoWallet = self.wallet?.convert(value: _saldo ?? 0)
-        
-        
-        screenExchange?.changeLabels(coins: "\(_sigla) - \(exchange.coins ?? "")" ,
+        let sigla = self.exchange.sigla ?? ""
+        let caixa = self.wallet?.caixaWallet[sigla]
+        let saldo = self.wallet?.saldo
+        let saldoWallet = self.wallet?.convert(value: saldo ?? 0)
+        screenExchange?.changeLabels(coins: "\(sigla) - \(exchange.coins ?? "")" ,
                                      variation: exchange.variation ?? "",
                                      compra: "Compra: R$ \(compra)" ,
                                      venda: "Venda: R$ \(venda)" ,
@@ -46,7 +44,6 @@ class ExchangeViewController: UIViewController {
         view.endEditing(true)
         self.buttoBuyChecked()
         self.buttonSellChecked()
-        
     }
     
     override func loadView() {
@@ -100,18 +97,18 @@ class ExchangeViewController: UIViewController {
         
         guard let amount = Int(self.screenExchange?.textField.text ?? "") else { return ""}
         print(amount)
-        guard let _compra = self.exchange.compra else {return ""}
+        guard let compra = self.exchange.compra else {return ""}
         
-        let returnBuy = self.wallet?.buy(quantity: amount, valueBuy: _compra, sigla: exchange.sigla ?? "")
+        let returnBuy = self.wallet?.buy(quantity: amount, valueBuy: compra, sigla: exchange.sigla ?? "")
         return "Parabéns! Você acabou de comprar \(amount) \(self.exchange.coins ?? ""), saldo total \(returnBuy ?? "")"
     }
     
     func toSellExchange() -> String{
         
         guard let amount = Int(self.screenExchange?.textField.text ?? "") else { return ""}
-        guard let _vender = self.exchange.venda else {return ""}
+        guard let vender = self.exchange.venda else {return ""}
         
-        let returnSell = self.wallet?.sell(quantity: amount, valueSell: _vender, sigla: exchange.sigla ?? "")
+        let returnSell = self.wallet?.sell(quantity: amount, valueSell: vender, sigla: exchange.sigla ?? "")
         return "Parabéns! Você acabou de vender \(amount) \(self.exchange.coins ?? ""), saldo total \(returnSell ?? "")"
     }
 }
