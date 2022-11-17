@@ -42,8 +42,7 @@ class ExchangeViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-        self.buttonBuyChecked()
-        self.buttonSellChecked()
+        buttonChecked()
     }
     
     override func loadView() {
@@ -53,7 +52,7 @@ class ExchangeViewController: UIViewController {
     
     //MARK: - Methods
     
-    func buttonBuyChecked(){
+    func buttonChecked(){
         
         if self.wallet?.saldo ?? 0 > 0 && self.screenExchange?.textField.text ?? "" != ""{
             self.screenExchange?.buttonComprar.addTarget(self, action: #selector(self.pressButtonBuy) , for: .touchUpInside)
@@ -63,10 +62,7 @@ class ExchangeViewController: UIViewController {
             self.screenExchange?.buttonComprar.backgroundColor = .blue.withAlphaComponent(0.4)
             self.screenExchange?.buttonComprar.removeTarget(self, action: #selector(self.pressButtonBuy), for: .touchUpInside)
         }
-    }
-    
-    func buttonSellChecked(){
-        
+
         if self.wallet?.caixaWallet[self.exchange.sigla ?? ""] ?? 0 > 0 && self.screenExchange?.textField.text ?? "" != "" && self.wallet?.caixaWallet[self.exchange.sigla ?? ""] ?? 0 >= Int(self.screenExchange?.textField.text ?? "") ?? 0 {
             self.screenExchange?.buttonVender.addTarget(self, action: #selector(self.pressButtonSell) , for: .touchUpInside)
             self.screenExchange?.buttonVender.backgroundColor = .blue
@@ -76,7 +72,6 @@ class ExchangeViewController: UIViewController {
             self.screenExchange?.buttonVender.removeTarget(self, action: #selector(self.pressButtonSell), for: .touchUpInside)
         }
     }
-    
     
     @objc func pressButtonSell(){
         
