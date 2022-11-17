@@ -55,56 +55,88 @@ class ExchangeViewController: UIViewController {
     func buttonChecked(){
         
         if self.wallet?.saldo ?? 0 > 0 && self.screenExchange?.textField.text ?? "" != ""{
-            self.screenExchange?.buttonComprar.addTarget(self, action: #selector(self.pressButtonBuy) , for: .touchUpInside)
+            self.screenExchange?.buttonComprar.addTarget(self, action: #selector(self.pressButton) , for: .touchUpInside)
             self.screenExchange?.buttonComprar.backgroundColor = .blue
         }
         else {
             self.screenExchange?.buttonComprar.backgroundColor = .blue.withAlphaComponent(0.4)
-            self.screenExchange?.buttonComprar.removeTarget(self, action: #selector(self.pressButtonBuy), for: .touchUpInside)
+            self.screenExchange?.buttonComprar.removeTarget(self, action: #selector(self.pressButton), for: .touchUpInside)
         }
-
         if self.wallet?.caixaWallet[self.exchange.sigla ?? ""] ?? 0 > 0 && self.screenExchange?.textField.text ?? "" != "" && self.wallet?.caixaWallet[self.exchange.sigla ?? ""] ?? 0 >= Int(self.screenExchange?.textField.text ?? "") ?? 0 {
-            self.screenExchange?.buttonVender.addTarget(self, action: #selector(self.pressButtonSell) , for: .touchUpInside)
+            self.screenExchange?.buttonVender.addTarget(self, action: #selector(self.pressButton) , for: .touchUpInside)
             self.screenExchange?.buttonVender.backgroundColor = .blue
         }
         else {
             self.screenExchange?.buttonVender.backgroundColor = .blue.withAlphaComponent(0.4)
-            self.screenExchange?.buttonVender.removeTarget(self, action: #selector(self.pressButtonSell), for: .touchUpInside)
+            self.screenExchange?.buttonVender.removeTarget(self, action: #selector(self.pressButton), for: .touchUpInside)
         }
     }
     
-    @objc func pressButtonSell(){
+    @objc func pressButton(sender: UIButton){
         
-        let buyAndSell: BuyAndSellViewController = BuyAndSellViewController()
-        buyAndSell.labelText = self.toSellExchange()
-        buyAndSell.titleScreen = "Vender"
-        self.navigationController?.pushViewController(buyAndSell, animated: true)
-    }
-    @objc func pressButtonBuy(){
+        if sender.tag == 1 {
+            let buyAndSell: BuyAndSellViewController = BuyAndSellViewController()
+            buyAndSell.labelText = self.returnCongratulation(tag: sender.tag)
+            buyAndSell.titleScreen = "Comprar"
+            self.navigationController?.pushViewController(buyAndSell, animated: true)
+        } else {
+            let buyAndSell: BuyAndSellViewController = BuyAndSellViewController()
+            buyAndSell.labelText = self.returnCongratulation(tag: sender.tag)
+            buyAndSell.titleScreen = "Vender"
+            self.navigationController?.pushViewController(buyAndSell, animated: true)
+        }
         
-        let buyAndSell: BuyAndSellViewController = BuyAndSellViewController()
-        buyAndSell.labelText = self.toBuyExchange()
-        buyAndSell.titleScreen = "Comprar"
-        self.navigationController?.pushViewController(buyAndSell, animated: true)
-    }
-    
-    func toBuyExchange() -> String{
-        
-        guard let amount = Int(self.screenExchange?.textField.text ?? "") else { return ""}
-        print(amount)
-        guard let compra = self.exchange.compra else {return ""}
-        
-        let returnBuy = self.wallet?.buy(quantity: amount, valueBuy: compra, sigla: exchange.sigla ?? "")
-        return "Parabéns! Você acabou de comprar \(amount) \(self.exchange.coins ?? ""), saldo total \(returnBuy ?? "")"
     }
     
-    func toSellExchange() -> String{
-        
+    func returnCongratulation(tag: Int) -> String{
         guard let amount = Int(self.screenExchange?.textField.text ?? "") else { return ""}
-        guard let vender = self.exchange.venda else {return ""}
         
-        let returnSell = self.wallet?.sell(quantity: amount, valueSell: vender, sigla: exchange.sigla ?? "")
-        return "Parabéns! Você acabou de vender \(amount) \(self.exchange.coins ?? ""), saldo total \(returnSell ?? "")"
+        if tag == 1 {
+            guard let compra = self.exchange.compra else {return ""}
+            
+            let returnBuy = self.wallet?.buy(quantity: amount, valueBuy: compra, sigla: exchange.sigla ?? "")
+            return "Parabéns! Você acabou de comprar \(amount) \(self.exchange.coins ?? ""), saldo total \(returnBuy ?? "")"
+        }
+        else {
+            guard let vender = self.exchange.venda else {return ""}
+            
+            let returnSell = self.wallet?.sell(quantity: amount, valueSell: vender, sigla: exchange.sigla ?? "")
+            return "Parabéns! Você acabou de vender \(amount) \(self.exchange.coins ?? ""), saldo total \(returnSell ?? "")"
+        }
     }
+    
+//    @objc func pressButtonSell(){
+//
+//        let buyAndSell: BuyAndSellViewController = BuyAndSellViewController()
+//        buyAndSell.labelText = self.toSellExchange()
+//        buyAndSell.titleScreen = "Vender"
+//        self.navigationController?.pushViewController(buyAndSell, animated: true)
+//    }
+//    @objc func pressButtonBuy(){
+//
+//        let buyAndSell: BuyAndSellViewController = BuyAndSellViewController()
+//        buyAndSell.labelText = self.toBuyExchange()
+//        buyAndSell.titleScreen = "Comprar"
+//        self.navigationController?.pushViewController(buyAndSell, animated: true)
+//    }
+    
+//    func toBuyExchange() -> String{
+//
+//        guard let amount = Int(self.screenExchange?.textField.text ?? "") else { return ""}
+//        print(amount)
+//        guard let compra = self.exchange.compra else {return ""}
+//
+//        let returnBuy = self.wallet?.buy(quantity: amount, valueBuy: compra, sigla: exchange.sigla ?? "")
+//        return "Parabéns! Você acabou de comprar \(amount) \(self.exchange.coins ?? ""), saldo total \(returnBuy ?? "")"
+//    }
+//
+//    func toSellExchange() -> String{
+//
+//        guard let amount = Int(self.screenExchange?.textField.text ?? "") else { return ""}
+//        guard let vender = self.exchange.venda else {return ""}
+//
+//        let returnSell = self.wallet?.sell(quantity: amount, valueSell: vender, sigla: exchange.sigla ?? "")
+//        return "Parabéns! Você acabou de vender \(amount) \(self.exchange.coins ?? ""), saldo total \(returnSell ?? "")"
+//    }
 }
 
