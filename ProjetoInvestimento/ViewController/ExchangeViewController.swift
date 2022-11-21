@@ -94,6 +94,8 @@ class ExchangeViewController: UIViewController {
     }
     
     func returnCongratulation(tag: Int) -> String{
+        var choice = ""
+        var returnValue = ""
         guard let amount = Int(self.screenExchange?.textField.text ?? ""),
               let wallet = self.wallet,
               let sigla = self.exchange.sigla,
@@ -101,16 +103,16 @@ class ExchangeViewController: UIViewController {
         
         if tag == 1 {
             guard let compra = self.exchange.compra else {return ""}
-            
-            let returnBuy = wallet.buy(amount, of: compra, your: sigla)
-            return "Parabéns! Você acabou de comprar \(amount) \(coins), saldo total \(returnBuy)"
+            choice = "comprar"
+            returnValue = wallet.buy(amount, of: compra, your: sigla)
         }
         else {
             guard let vender = self.exchange.venda else {return ""}
-            
-            let returnSell = wallet.sell(amount, of: vender, your: sigla)
-            return "Parabéns! Você acabou de vender \(amount) \(coins), saldo total \(returnSell)"
+            choice = "vender"
+            returnValue = wallet.sell(amount, of: vender, your: sigla)
         }
+        
+        return "Parabéns! Você acabou de \(choice) \(amount) \(coins), saldo total \(returnValue)"
     }
 }
 
