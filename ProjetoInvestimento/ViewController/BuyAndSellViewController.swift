@@ -22,7 +22,7 @@ class BuyAndSellViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         title = self.titleScreen
-        self.screenBuyAndSell?.changeData(label: self.labelText ?? "")
+        self.screenBuyAndSell?.changeData(label: labelText ?? "")
         self.screenBuyAndSell?.buttonHome.addTarget(self, action: #selector(tappedBackHome), for: .touchUpInside)
     }
 
@@ -31,11 +31,14 @@ class BuyAndSellViewController: UIViewController {
         self.view = screenBuyAndSell
     }
     
-    
     //MARK: - Methods
    
     @objc func tappedBackHome(){
         self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    static func returnMessage(your choice : String, and inQuantity: Int, of coins: String, all saldo: String) -> String {
+        return "Parabéns! Você acabou de \(choice) \(inQuantity) \(coins), saldo total \(saldo)"
     }
 }
 

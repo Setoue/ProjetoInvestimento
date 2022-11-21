@@ -90,7 +90,6 @@ class ExchangeViewController: UIViewController {
             buyAndSell.titleScreen = "Vender"
             self.navigationController?.pushViewController(buyAndSell, animated: true)
         }
-        
     }
     
     func returnCongratulation(tag: Int) -> String{
@@ -111,7 +110,7 @@ class ExchangeViewController: UIViewController {
             choice = "vender"
             returnValue = wallet.BuyOrSell(amount, ofValue: vender, your: sigla, and: tag)
         }
-        return "Parabéns! Você acabou de \(choice) \(amount) \(coins), saldo total \(returnValue)"
+        return BuyAndSellViewController.returnMessage(your: choice, and: amount, of: coins, all: returnValue)
     }
 }
 
