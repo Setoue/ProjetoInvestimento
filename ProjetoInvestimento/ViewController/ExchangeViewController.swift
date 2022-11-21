@@ -102,16 +102,15 @@ class ExchangeViewController: UIViewController {
               let coins = self.exchange.coins else { return ""}
         
         if tag == 1 {
-            guard let compra = self.exchange.compra else {return ""}
+            guard let comprar = self.exchange.compra else {return ""}
             choice = "comprar"
-            returnValue = wallet.buy(amount, of: compra, your: sigla)
+            returnValue = wallet.BuyOrSell(amount, ofValue: comprar, your: sigla, and: tag)
         }
         else {
             guard let vender = self.exchange.venda else {return ""}
             choice = "vender"
-            returnValue = wallet.sell(amount, of: vender, your: sigla)
+            returnValue = wallet.BuyOrSell(amount, ofValue: vender, your: sigla, and: tag)
         }
-        
         return "Parabéns! Você acabou de \(choice) \(amount) \(coins), saldo total \(returnValue)"
     }
 }
