@@ -37,7 +37,7 @@ class Wallet {
         return numberFormat
     }
     
-    func sell(quantity: Int, valueSell: Double, sigla: String) -> String{
+    func sell(_ quantity: Int,of valueSell: Double,your sigla: String) -> String{
         guard let valueCoins = self.caixaWallet[sigla] else { return ""}
         
         let allSell = Double(quantity) * valueSell
@@ -46,7 +46,7 @@ class Wallet {
         return convert(value: saldo)
     }
     
-    func buy(quantity: Int, valueBuy: Double, sigla: String) -> String{
+    func buy(_ quantity: Int, of valueBuy: Double,your sigla: String) -> String{
         guard let valueCoins = self.caixaWallet[sigla] else { return ""}
         
         let allSell = Double(quantity) * valueBuy
