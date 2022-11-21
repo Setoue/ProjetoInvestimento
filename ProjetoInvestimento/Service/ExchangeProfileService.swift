@@ -23,7 +23,6 @@ class ExchangeProfileService: ExchangeServiceDelegate{
                 
             case .failure(_):
                 print("ERROR -> \(#function)")
-//                completion(nil, Error.errorRequest(error))
                 
             }
         }
