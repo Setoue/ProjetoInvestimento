@@ -108,6 +108,7 @@ class ExchangeScreen: UIView {
         btnVender.layer.borderColor = UIColor.blue.cgColor
         btnVender.layer.cornerRadius = 20
         btnVender.setTitle("VENDER", for: .normal)
+        btnVender.tag = 0
         return btnVender
     }()
     
@@ -117,6 +118,7 @@ class ExchangeScreen: UIView {
         btnComprar.layer.borderColor = UIColor.blue.cgColor
         btnComprar.layer.cornerRadius = 20
         btnComprar.setTitle("COMPRAR", for: .normal)
+        btnComprar.tag = 1
         return btnComprar
     }()
     

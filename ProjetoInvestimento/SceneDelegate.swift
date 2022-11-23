@@ -25,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigation.navigationBar.titleTextAttributes = textAttributes
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()
+        
     }
 }
 
