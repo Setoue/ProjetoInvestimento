@@ -67,7 +67,7 @@ class ExchangeViewController: UIViewController {
             self.screenExchange?.buttonComprar.backgroundColor = .blue.withAlphaComponent(0.4)
             self.screenExchange?.buttonComprar.removeTarget(self, action: #selector(self.pressButton), for: .touchUpInside)
         }
-        if wallet.caixaWallet[sigla] ?? 0 > 0 && textField != "" && wallet.caixaWallet[sigla] ?? 0 >= Int(textField) ?? 0 {
+        if wallet.caixaWallet[sigla] ?? 0 > 0 && textField != "" && wallet.caixaWallet[sigla] ?? 0 >= Int(textField) ?? 0{
             self.screenExchange?.buttonVender.addTarget(self, action: #selector(self.pressButton) , for: .touchUpInside)
             self.screenExchange?.buttonVender.backgroundColor = .blue
         }
