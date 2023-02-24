@@ -16,53 +16,51 @@ class ExchangeViewModel {
     private var delegate: ExchangeViewModelDelegate?
     var allCoins = [Coins]()
     
+    
     //MARK: - Methods
     
     public func delegate(delegate: ExchangeViewModelDelegate?){
         self.delegate = delegate
     }
     
-    public func seek(){
-        
-        self.service.getExchangeFromAPI { success, error in
+    public func request() {
+        self.service.getExchange { [weak self] result in
             
-            if var success = success {
-                print("O obejto está sendo retornado")
+            switch result {
                 
-                success.results.currencies.ARS.sigla = "ARS"
-                success.results.currencies.USD.sigla = "USD"
-                success.results.currencies.EUR.sigla = "EUR"
-                success.results.currencies.AUD.sigla = "AUD"
-                success.results.currencies.GBP.sigla = "GBP"
-                success.results.currencies.CAD.sigla = "CAD"
-                success.results.currencies.JPY.sigla = "JPY"
-                success.results.currencies.BTC.sigla = "BTC"
-                success.results.currencies.CNY.sigla = "CNY"
-                
-                self.allCoins.append(success.results.currencies.USD)
-                self.allCoins.append(success.results.currencies.EUR)
-                self.allCoins.append(success.results.currencies.ARS)
-                self.allCoins.append(success.results.currencies.AUD)
-                self.allCoins.append(success.results.currencies.GBP)
-                self.allCoins.append(success.results.currencies.CAD)
-                self.allCoins.append(success.results.currencies.JPY)
-                self.allCoins.append(success.results.currencies.BTC)
-                self.allCoins.append(success.results.currencies.CNY)
-                
-                self.delegate?.success()
-                
-            } else {
-                self.delegate?.error(mensage: error?.localizedDescription ?? "")
+            case .success(let object):
+                self?.success(object: object.results)
+            case .failure(let error):
+                self?.failure(error: error)
             }
         }
     }
+    
+    private func success(object: Results) {
+        print("O objeto está sendo retornado")
+        let object = object
+        
+        let moedas = [object.currencies.ARS, object.currencies.USD, object.currencies.EUR, object.currencies.AUD, object.currencies.GBP, object.currencies.CAD, object.currencies.JPY, object.currencies.BTC, object.currencies.CNY ]
+        
+        self.allCoins = moedas
+        self.delegate?.success()
+    }
+    
+    private func failure(error: Error){
+        Logger.log("Não foi possível carregar o objeto")
+        self.delegate?.error(mensage: error.localizedDescription)
+    }
+    
     
     public func returnCount() -> Int{
         return self.allCoins.count
     }
     
-    public func nameExchange(indexPath: Int) -> String{
-        return self.allCoins[indexPath].sigla ?? ""
+    public func returnSigla(indexPath: Int) -> String{
+        
+        let siglas = ["ARS", "USD", "EUR", "AUD", "GBP", "CAD", "JPY", "BTC", "CNY"]
+        
+        return siglas[indexPath]
     }
     public func returnVariationPercent(indexPath: Int) -> String{
         let variation = String(self.allCoins[indexPath].variation)
@@ -84,12 +82,6 @@ class ExchangeViewModel {
         }
     }
     
-    public func returnSigla(indexPath: Int) -> String{
-        let sigla = self.allCoins[indexPath].sigla ?? nil
-        guard let sigla = sigla else { return ""}
-        
-        return sigla
-    }
     public func returnCoin(indexPath: Int) -> String{
         let name = self.allCoins[indexPath].name
         return name
@@ -102,5 +94,5 @@ class ExchangeViewModel {
     public func returnVenda(indexPath: Int) -> Double{
         guard let venda = self.allCoins[indexPath].sell else { return 0}
         return venda
-    }   
+    }
 }

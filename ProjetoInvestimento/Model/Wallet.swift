@@ -12,6 +12,7 @@ class Wallet {
     //MARK: - Attributes
     
     var saldo: Double
+    var returnValue: Double
     var caixaWallet: [String: Int]
     var listSiglas = ["ARS","USD","EUR","AUD","GBP","CAD","JPY","BTC","CNY"]
     
@@ -19,6 +20,7 @@ class Wallet {
     
     init() {
         self.saldo = 700
+        self.returnValue = 0
         var caixaWallet = [String: Int]()
     
         for coins in listSiglas{
@@ -38,18 +40,28 @@ class Wallet {
     }
     
     func BuyOrSell(_ quantity: Int, ofValue value: Double,your sigla: String, and tag: Int) -> String{
+        
         guard let valueCoins = self.caixaWallet[sigla] else { return ""}
+        self.returnValue = Double(quantity) * value
         
         if tag == 1 {
-            let allSell = Double(quantity) * value
-            self.saldo -= allSell
+            self.saldo -= self.returnValue
             self.caixaWallet[sigla] = valueCoins + quantity
         } else {
-            let allSell = Double(quantity) * value
-            self.saldo += allSell
+            self.saldo += self.returnValue
             self.caixaWallet[sigla] = valueCoins - quantity
         }
-        
-        return convert(value: saldo)
+        return convert(value: returnValue)
     }
+    
+    func validationDataSell(exchange: Exchange, textField: String) -> Bool {
+
+        return caixaWallet[exchange.sigla] ?? 0 > 0 && caixaWallet[exchange.sigla] ?? 0 >= Int(textField) ?? 0 && Double(caixaWallet[exchange.sigla] ?? 0) * exchange.venda >= exchange.venda && Int(textField) ?? 0 > 0 ? true : false
+    }
+    
+    func validationDataBuy(exchange: Exchange, textField: String) -> Bool{
+        
+        return saldo >= exchange.compra * (Double(textField) ?? 0) && Int(textField) ?? 0 > 0  ? true : false
+    }
+  
 }

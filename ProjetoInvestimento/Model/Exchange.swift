@@ -9,11 +9,21 @@ import UIKit
 
 struct Exchange {
 
-    var coins: String?
-    var sigla: String?
-    var variation: String?
-    var compra: Double?
-    var venda: Double?
-    var color: UIColor?
-    var number: Double?
+    var coins: String
+    var sigla: String
+    var variation: String
+    var compra: Double
+    var venda: Double
+    var color: UIColor
+    
+    init(coins: String, sigla: String, variation: String, compra: Double, venda: Double, color: UIColor) {
+        self.coins = coins
+        self.sigla = sigla
+        self.variation = variation
+        self.compra = compra
+        self.venda = venda
+        self.color = color
+
+    }
+    
 }

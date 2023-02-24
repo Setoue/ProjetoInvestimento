@@ -6,25 +6,35 @@
 //
 
 import Foundation
-import Alamofire
 
-class ExchangeProfileService: ExchangeServiceDelegate{
+enum ServiceError: Error {
+    case noData
+}
+
+class ExchangeProfileService{
     
-    func getExchangeFromAPI(completion: @escaping completion<ExchangeGroup?>) {
+    func getExchange(completion: @escaping (Result<ExchangeGroup, Error>) -> Void) {
         
-        let url: String = "https://api.hgbrasil.com/finance"
+        guard let url = URL(string: "https://api.hgbrasil.com/finance") else { return }
         
-        AF.request(url, method: .get).validate().responseDecodable(of: ExchangeGroup.self) { response in
-            
-            switch response.result{
-            case .success(let success):
-                print("SUCCESS -> \(#function)")
-                completion(success, nil)
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            DispatchQueue.main.async {
                 
-            case .failure(_):
-                print("ERROR -> \(#function)")
+                guard let data = data else {
+                    completion(.failure(error ?? ServiceError.noData))
+                    return
+                }
                 
+                do {
+                    let object = try JSONDecoder().decode(ExchangeGroup.self, from: data)
+                    completion(.success(object))
+                    print(object)
+                } catch {
+                    completion(.failure(error))
+                    Logger.log("Falha ao decodificar os dados")
+                    print(error)
+                }
             }
-        }
+        }.resume()
     }
 }
